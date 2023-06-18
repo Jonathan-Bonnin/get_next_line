@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 08:54:25 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/16 09:55:39 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/18 10:02:25 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ typedef struct s_list
 {
 	char			*content;
 	struct s_list	*next;
-	struct s_list 	*last;
+	//struct s_list 	*last;
 } t_list;
+int found_newline (t_list *list);
 t_list *get_last_element_from_list (t_list *list);
-int get_string_length(char *string);
-void read_and_store(int fd, t_list **storage);
-void take_line(t_list *storage, char **line);
-void free_storage(t_list *storage);
-int same_line (t_list *storage);
-void clean_storage(t_list **storage);
-void add_to_storage(t_list **storage, char *buffer, int count_chars_read);
-void add_new_to_last(t_list *list, t_list *new);
-void create_line(char **line, t_list *storage);
+int get_string_length(const char *string);
+void read_and_store(int fd, t_list **list);
+void take_line(t_list *list, char **line);
+void free_list(t_list *list);
+void clean_list(t_list **list);
+void add_to_list(t_list **list, char *buffer, int count_read);
+//void add_new_to_last(t_list *list, t_list *new);
+void create_line(char **line, t_list *list);
 char *get_next_line(int fd);
 
 #endif

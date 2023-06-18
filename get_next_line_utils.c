@@ -1,50 +1,51 @@
 #include "get_next_line.h"
 
-int same_line (t_list *storage) 
+int	found_newline(t_list *list)
 {
-    int i;
+	int		i;
+	t_list	*current;
 
-    t_list *current;
-
-    if (storage == NULL)
-        return (0);
-    storage = get_last_element_from_list(storage);
-
-    i = 0;
-    while (storage->content[i]) 
-    {
-        if (storage->content[i] == '\n')
-            return (0);
-        i++;
-    }
-    return (1);     
+	if (list == NULL)
+		return (0);
+	current = get_last_element_from_list(list);
+	i = 0;
+	while (current->content[i])
+	{
+		if (current->content[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 t_list *get_last_element_from_list (t_list *list)
 {
-    while(list && list->next)
-        list = list->next;
-    return (list);
+    t_list *last;
+
+    last = list;
+    while(last && last->next)
+        last = last->next;
+    return (last);
 }
 
-void add_new_to_last(t_list *list, t_list *new)
-{
-    list = get_last_element_from_list(list);
-    list->next = new;
-}
+// void add_new_to_last(t_list *list, t_list *new)
+// {
+//     list = get_last_element_from_list(*list);
+//     list->next = new;
+// }
 
-void create_line(char **line, t_list *storage)
+void create_line(char **line, t_list *list)
 {
     int i;
     int j;
 
     j = 0;
-    while (storage)
+    while (list)
     {
         i = 0;
-        while (storage->content[i])
+        while (list->content[i])
         {
-            if(storage->content[i] == '\n')
+            if(list->content[i] == '\n')
             {
                 j++;
                 break;
@@ -52,12 +53,12 @@ void create_line(char **line, t_list *storage)
             j++;
             i++;
         }
-        storage = storage->next;
+        list = list->next;
     }
     *line = malloc(j + 1);
 }
 
-int get_string_length(char *string)
+int get_string_length(const char *string)
 {
     int i;
     i = 0;
@@ -66,12 +67,12 @@ int get_string_length(char *string)
     return (i);
 }
 
-void free_storage(t_list *storage)
+void free_list(t_list *list)
 {
     t_list *current;
     t_list *next;
 
-    current = storage;
+    current = list;
     while (current)
     {
         free(current->content);
