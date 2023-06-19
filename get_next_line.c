@@ -3,7 +3,7 @@
 char *get_next_line(int fd)
 {
     static t_list *list = NULL;
-    char        *line;
+    char            *line;
 
     if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
         return (NULL);
@@ -57,16 +57,16 @@ void add_to_list(t_list **list, char *buffer, int count_read)
     if (new == NULL)
         return ;
     new->next = NULL;
-    new->content = malloc(count_read + 1);
-    if (new->content == NULL)
+    new->string = malloc(count_read + 1);
+    if (new->string == NULL)
         return ;
     i = 0;
     while (buffer[i] && i < count_read)
     {
-        new->content[i] = buffer[i];
+        new->string[i] = buffer[i];
         i++;
     }
-    new->content[i] = '\0';
+    new->string[i] = '\0';
     if (*list == NULL)
     {
         *list = new;
@@ -92,14 +92,14 @@ void  take_line(t_list *list, char **line)
     while (list)
     {
         i = 0;
-        while (list->content[i])
+        while (list->string[i])
         {
-            if (list->content[i] == '\n')
+            if (list->string[i] == '\n')
             {
-                (*line)[j++] = list->content[i];
+                (*line)[j++] = list->string[i];
                 break;
             }
-            (*line)[j++] = list->content[i++];
+            (*line)[j++] = list->string[i++];
         }
         list = list->next;
     }
@@ -119,17 +119,17 @@ void clean_list(t_list **list)
     clean_node->next = NULL;
     last = get_last_element_from_list(*list);
     i = 0;
-    while (last->content[i] && last->content[i] != '\n')
+    while (last->string[i] && last->string[i] != '\n')
         i++;
-    if (last->content && last->content[i] == '\n')
+    if (last->string && last->string[i] == '\n')
         i++;
-    clean_node->content = malloc(get_string_length(last->content) - i  + 1);
-    if (clean_node->content == NULL)
+    clean_node->string = malloc(get_string_length(last->string) - i  + 1);
+    if (clean_node->string == NULL)
 		return ;
     j = 0;
-    while(last->content[i])
-        clean_node->content[j++] = last->content[i++];
-    clean_node->content[j] = '\0';
+    while(last->string[i])
+        clean_node->string[j++] = last->string[i++];
+    clean_node->string[j] = '\0';
     free_list(*list);
     *list = clean_node;
 }

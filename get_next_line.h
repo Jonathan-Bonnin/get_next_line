@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 08:54:25 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/18 10:02:25 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/19 09:31:52 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 /* Struct*/
 typedef struct s_list
 {
-	char			*content;
+	char			*string;
 	struct s_list	*next;
-	//struct s_list 	*last;
 } t_list;
 int found_newline (t_list *list);
 t_list *get_last_element_from_list (t_list *list);
