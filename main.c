@@ -6,14 +6,14 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 08:51:56 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/19 09:35:41 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/20 08:30:55 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
 
-int	main	(void)
+int	main(void)
 {
 	int		fd;
 	char	*line;

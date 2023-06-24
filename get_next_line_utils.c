@@ -6,13 +6,13 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 09:41:53 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/19 09:43:01 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:55:22 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	found_newline(t_list *list)
+int	found_new_line(t_list *list)
 {
 	int		i;
 	t_list	*current;
@@ -59,7 +59,7 @@ void	create_line(char **line, t_list *list)
 			j++;
 			i++;
 		}
-			list = list->next;
+		list = list->next;
 	}
 	*line = malloc(j + 1);
 }
