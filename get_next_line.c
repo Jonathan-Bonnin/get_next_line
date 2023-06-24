@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 08:36:05 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/24 10:02:22 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:28:14 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 	read_and_store(fd, &list);
 	if (list == NULL)
 		return (NULL);
-	take_line(list, &line);
+	convert_list_to_line(list, &line);
 	clean_list(&list);
 	if (line[0] == '\0')
 	{
@@ -53,12 +53,12 @@ void	read_and_store(int fd, t_list **list)
 			return ;
 		}
 		buffer[count_read] = '\0';
-		add_to_list(list, buffer, count_read);
+		add_buffer_to_list(list, buffer, count_read);
 		free(buffer);
 	}
 }
 
-void	add_to_list(t_list **list, char *buffer, int count_read)
+void	add_buffer_to_list(t_list **list, char *buffer, int count_read)
 {
 	int		i;
 	t_list	*last;
@@ -87,14 +87,14 @@ void	add_to_list(t_list **list, char *buffer, int count_read)
 	last->next = new;
 }
 
-void	take_line(t_list *list, char **line)
+void	convert_list_to_line(t_list *list, char **line)
 {
 	int	str_index;
 	int	line_index;
 
 	if (list == NULL)
 		return ;
-	create_line(line, list);
+	malloc_line(line, list);
 	if (*line == NULL)
 		return ;
 	line_index = 0;

@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 09:41:53 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/24 10:05:23 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:23:46 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list	*get_last_element_from_list(t_list *list)
 	return (last);
 }
 
-void	create_line(char **line, t_list *list)
+void	malloc_line(char **line, t_list *list)
 {
 	int	i;
 	int	line_length;
