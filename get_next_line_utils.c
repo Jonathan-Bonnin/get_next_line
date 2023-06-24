@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 09:41:53 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/24 09:55:22 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:05:23 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ t_list	*get_last_element_from_list(t_list *list)
 void	create_line(char **line, t_list *list)
 {
 	int	i;
-	int	j;
+	int	line_length;
 
-	j = 0;
+	line_length = 0;
 	while (list)
 	{
 		i = 0;
@@ -53,15 +53,15 @@ void	create_line(char **line, t_list *list)
 		{
 			if (list->string[i] == '\n')
 			{
-				j++;
+				line_length++;
 				break ;
 			}
-			j++;
+			line_length++;
 			i++;
 		}
 		list = list->next;
 	}
-	*line = malloc(j + 1);
+	*line = malloc(line_length + 1);
 }
 
 int	get_string_length(const char *string)

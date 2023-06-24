@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 08:36:05 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/24 08:06:41 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:02:22 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,30 +89,30 @@ void	add_to_list(t_list **list, char *buffer, int count_read)
 
 void	take_line(t_list *list, char **line)
 {
-	int	i;
-	int	j;
+	int	str_index;
+	int	line_index;
 
 	if (list == NULL)
 		return ;
 	create_line(line, list);
 	if (*line == NULL)
 		return ;
-	j = 0;
+	line_index = 0;
 	while (list)
 	{
-		i = 0;
-		while (list->string[i])
+		str_index = 0;
+		while (list->string[str_index])
 		{
-			if (list->string[i] == '\n')
+			if (list->string[str_index] == '\n')
 			{
-				(*line)[j++] = list->string[i];
+				(*line)[line_index++] = list->string[str_index];
 				break ;
 			}
-			(*line)[j++] = list->string[i++];
+			(*line)[line_index++] = list->string[str_index++];
 		}
 		list = list->next;
 	}
-	(*line)[j] = '\0';
+	(*line)[line_index] = '\0';
 }
 
 void	clean_list(t_list **list)
