@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 09:41:53 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/24 13:23:46 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:27:09 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list	*get_last_element_from_list(t_list *list)
 	return (last);
 }
 
-void	malloc_line(char **line, t_list *list)
+int	get_line_length(t_list *list)
 {
 	int	i;
 	int	line_length;
@@ -61,7 +61,7 @@ void	malloc_line(char **line, t_list *list)
 		}
 		list = list->next;
 	}
-	*line = malloc(line_length + 1);
+	return (line_length);
 }
 
 int	get_string_length(const char *string)

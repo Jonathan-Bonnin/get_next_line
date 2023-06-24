@@ -6,7 +6,7 @@
 /*   By: jonathan <jonathan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 08:36:05 by jonathan          #+#    #+#             */
-/*   Updated: 2023/06/24 13:28:14 by jonathan         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:36:38 by jonathan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*get_next_line(int fd)
 	read_and_store(fd, &list);
 	if (list == NULL)
 		return (NULL);
-	convert_list_to_line(list, &line);
-	clean_list(&list);
+	create_line_from_list_data(list, &line);
+	forward_list_to_new_line(&list);
 	if (line[0] == '\0')
 	{
 		free_list(list);
@@ -87,14 +87,14 @@ void	add_buffer_to_list(t_list **list, char *buffer, int count_read)
 	last->next = new;
 }
 
-void	convert_list_to_line(t_list *list, char **line)
+void	create_line_from_list_data(t_list *list, char **line)
 {
 	int	str_index;
 	int	line_index;
 
 	if (list == NULL)
 		return ;
-	malloc_line(line, list);
+	*line = malloc(get_line_length(list) + 1);
 	if (*line == NULL)
 		return ;
 	line_index = 0;
@@ -115,30 +115,30 @@ void	convert_list_to_line(t_list *list, char **line)
 	(*line)[line_index] = '\0';
 }
 
-void	clean_list(t_list **list)
+void	forward_list_to_new_line(t_list **list)
 {
 	t_list	*last;
-	t_list	*clean_node;
+	t_list	*start_of_next_line;
 	int		i;
 	int		j;
 
-	clean_node = malloc(sizeof(t_list));
-	if (list == NULL || clean_node == NULL)
+	start_of_next_line = malloc(sizeof(t_list));
+	if (list == NULL || start_of_next_line == NULL)
 		return ;
-	clean_node->next = NULL;
+	start_of_next_line->next = NULL;
 	last = get_last_element_from_list(*list);
 	i = 0;
 	while (last->string[i] && last->string[i] != '\n')
 		i++;
 	if (last->string && last->string[i] == '\n')
 		i++;
-	clean_node->string = malloc(get_string_length(last->string) - i + 1);
-	if (clean_node->string == NULL)
+	start_of_next_line->string = malloc(get_string_length(last->string) - i + 1);
+	if (start_of_next_line->string == NULL)
 		return ;
 	j = 0;
 	while (last->string[i])
-		clean_node->string[j++] = last->string[i++];
-	clean_node->string[j] = '\0';
+		start_of_next_line->string[j++] = last->string[i++];
+	start_of_next_line->string[j] = '\0';
 	free_list(*list);
-	*list = clean_node;
+	*list = start_of_next_line;
 }
